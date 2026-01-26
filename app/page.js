@@ -5,6 +5,7 @@ import { Search, Phone, Mail, MapPin, Home as HomeIcon, Building2, Key, Trending
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent } from '@/components/ui/card'
+import WhatsAppButton from '@/components/ui/WhatsappButton'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -275,6 +276,7 @@ export default function Home() {
   })
 
   return (
+   <>
     <div className="min-h-screen bg-gradient-to-b from-teal-50 to-white">
       {/* Navigation */}
       <nav className="bg-white shadow-md sticky top-0 z-40">
@@ -540,7 +542,7 @@ export default function Home() {
             <div>
               <h4 className="font-bold mb-4">Contact</h4>
               <ul className="space-y-2 text-gray-400">
-                <li className="flex items-center"><Phone className="w-4 h-4 mr-2" /> +91 98765 43210</li>
+                <li className="flex items-center"><Phone className="w-4 h-4 mr-2" onClick={() => window.location.href='tel:+919930047748'} /> +91 99300 47748</li>
                 <li className="flex items-center"><Mail className="w-4 h-4 mr-2" /> info@rajasthanrealestate.com</li>
                 <li className="flex items-center"><MapPin className="w-4 h-4 mr-2" /> Jogeshwari, Mumbai</li>
               </ul>
@@ -661,5 +663,8 @@ export default function Home() {
         </div>
       )}
     </div>
+    <WhatsAppButton />
+   </>
+    
   )
 }

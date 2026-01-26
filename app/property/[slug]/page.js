@@ -466,7 +466,7 @@ export default function PropertyDetail() {
                 </form>
 
                 <div className="mt-6 space-y-3">
-                  <Button variant="outline" className="w-full" onClick={() => window.location.href='tel:+919876543210'}>
+                  <Button variant="outline" className="w-full" onClick={() => window.location.href='tel:+919930047748'}>
                     <Phone className="w-5 h-5 mr-2" />
                     Call Now
                   </Button>
