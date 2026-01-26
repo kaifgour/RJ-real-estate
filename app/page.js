@@ -280,9 +280,9 @@ export default function Home() {
       <nav className="bg-white shadow-md sticky top-0 z-40">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <Image src='/logo/navbar-logo.png' alt='logo' width={300} height={100} className="h-[55px] w-[140px] md:h-[70px] md:w-[165px] object-cover" />
-              {/* <span className="text-2xl font-bold text-teal-600">Rajasthan Real Estate Solution</span> */}
+            <div className="flex items-center space-x-2 flex-col">
+              <Image src='/logo/nav_logo_edited.svg' alt='logo' width={300} height={100} className="lg:h-[75px] lg:w-[200px] w-[100px] h-[60px]" />
+              <span className="text-xs font-bold text-[#009095] mt-1">Rajasthan Real Estate Solutions</span>
             </div>
             <div className="hidden md:flex items-center space-x-6">
               <a href="#new-projects" className="text-gray-700 hover:text-teal-600 font-medium">New Projects</a>
@@ -523,9 +523,9 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
-              <div className="flex items-center space-x-2 mb-4">
-                <Building2 className="w-6 h-6 text-teal-500" />
-                <span className="text-xl font-bold">RRES</span>
+              <div className="flex space-x-2 mb-4 gap-1 flex-col items-start">
+                <Image src='/logo/nav_logo_edited.svg' alt='logo' width={80} height={40} className="lg:h-[80px] lg:w-[200px] w-[100px] h-[60px]" />
+                <span className="lg:text-xl font-regular text-md">Rajasthan Real Estate Solutions</span>
               </div>
               <p className="text-gray-400">Your trusted partner in finding the perfect home in Mumbai.</p>
             </div>
@@ -551,7 +551,7 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 Rajasthan Real Estate Solutions. All rights reserved.</p>
+            <p>&copy; 2026 Rajasthan Real Estate Solutions. All rights reserved.</p>
           </div>
         </div>
       </footer>
@@ -570,10 +570,7 @@ export default function Home() {
               {!submitSuccess ? (
                 <>
                   <div className="text-center mb-6">
-                    <div className="bg-teal-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <HomeIcon className="w-8 h-8 text-teal-600" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-gray-800 mb-2">Get Your Dream Home!</h3>
+                    <h3 className="text-2xl font-bold text-gray-800 my-2">Get Your Dream Home!</h3>
                     <p className="text-gray-600">Fill the form and get:</p>
                     <div className="mt-3 space-y-2 text-left">
                       <div className="flex items-center text-sm text-teal-600">

@@ -264,7 +264,7 @@ export default function PropertyDetail() {
               <span className="font-semibold">Back</span>
             </Link>
             <div className="flex items-center space-x-2">
-              <Image src='/logo/navbar-logo.png' alt='logo' width={300} height={100} className="h-[55px] w-[140px] md:h-[70px] md:w-[165px] object-cover" />
+              <Image src='/logo/nav_logo_edited.svg' alt='logo' width={300} height={100} className="lg:h-[80px] lg:w-[200px] w-[100px] h-[60px]"/>
             </div>
           </div>
         </div>
