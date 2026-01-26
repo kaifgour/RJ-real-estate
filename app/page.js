@@ -284,7 +284,7 @@ export default function Home() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2 flex-col">
               <Image src='/logo/nav_logo_edited.svg' alt='logo' width={300} height={100} className="lg:h-[75px] lg:w-[200px] w-[100px] h-[60px]" />
-              <span className="text-xs font-bold text-[#009095] mt-1">Rajasthan Real Estate Solutions</span>
+              <span className="text-sm md:text-[15px] font-bold text-[#009095] mt-1">Rajasthan Real Estate Solutions</span>
             </div>
             <div className="hidden md:flex items-center space-x-6">
               <a href="#new-projects" className="text-gray-700 hover:text-teal-600 font-medium">New Projects</a>
@@ -527,7 +527,7 @@ export default function Home() {
             <div>
               <div className="flex space-x-2 mb-4 gap-1 flex-col items-start">
                 <Image src='/logo/nav_logo_edited.svg' alt='logo' width={80} height={40} className="lg:h-[80px] lg:w-[200px] w-[100px] h-[60px]" />
-                <span className="lg:text-xl font-regular text-md">Rajasthan Real Estate Solutions</span>
+                <span className="lg:text-xl font-semibold text-md">Rajasthan Real Estate Solutions</span>
               </div>
               <p className="text-gray-400">Your trusted partner in finding the perfect home in Mumbai.</p>
             </div>
