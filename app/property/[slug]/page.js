@@ -1,12 +1,15 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
-import { ArrowLeft, MapPin, Building2, Calendar, Home, CheckCircle, Phone, Mail, Share2, Heart, Ruler, IndianRupee } from 'lucide-react'
+import { ArrowLeft, MapPin, Building2, Calendar, Home, CheckCircle, Phone, Mail, Share2, Heart, Check, Whatsapp, Ruler, IndianRupee } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import Link from 'next/link'
+import { toast } from "sonner"
+import { normalizePropertyName } from '@/lib/utils'
+
 import Image from 'next/image'
 
 const propertyDetails = {
@@ -230,28 +233,134 @@ export default function PropertyDetail() {
   const params = useParams()
   const slug = params.slug
   const property = propertyDetails[slug] || propertyDetails['lodha-amara-jogeshwari']
-  
+  const normalizedProperty = normalizePropertyName(slug)
+
   const [selectedImage, setSelectedImage] = useState(0)
   const [showContactForm, setShowContactForm] = useState(false)
   const [formData, setFormData] = useState({ name: '', phone: '', email: '' })
+  const [showOtpForm, setShowOtpForm] = useState(false)
+  const [otp, setOtp] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [otpSent, setOtpSent] = useState(false)
+  const [resendTimer, setResendTimer] = useState(30)
+  const [resendCount, setResendCount] = useState(0)
+  const [isSendingOtp, setIsSendingOtp] = useState(false)
+  const [verifiedUser, setVerifiedUser] = useState(false)
 
-  const handleContactSubmit = async (e) => {
-    e.preventDefault()
+
+  useEffect(() => {
+    const verified = localStorage.getItem('verified_lead')
+    if (verified === 'true') {
+      setVerifiedUser(true)
+    }
+  }, [])
+
+
+  const handleSendOtp = async () => {
+    if (!formData.name || !formData.phone) {
+      toast.error('Enter name and phone')
+      return
+    }
+
+    if (resendCount >= 2) {
+      toast.error('OTP limit reached. Please try later.')
+      return
+    }
+
+    setIsSendingOtp(true)
+
     try {
-      const response = await fetch('/api/leads', {
+      const res = await fetch('/api/otp/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, property: property.name })
+        body: JSON.stringify({ phone: formData.phone })
       })
-      if (response.ok) {
-        alert('Thank you! We will contact you soon.')
-        setShowContactForm(false)
-        setFormData({ name: '', phone: '', email: '' })
+
+      if (!res.ok) {
+        toast.error('Failed to send OTP')
+        setIsSendingOtp(false)
+        return
       }
-    } catch (error) {
-      alert('Failed to submit. Please try again.')
+
+      toast.success('OTP sent successfully')
+
+      setOtpSent(true)
+      setShowOtpForm(true)
+      setResendTimer(30)
+      setResendCount(prev => prev + 1)
+    } catch (err) {
+      toast.error('Something went wrong')
+    }
+
+    setIsSendingOtp(false)
+  }
+
+  const handleVerifyOtp = async () => {
+    if (otp.length !== 6) {
+      toast.error('Enter valid 6-digit OTP')
+      return
+    }
+
+    try {
+      setIsSubmitting(true)
+
+      const verify = await fetch('/api/otp/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          phone: formData.phone,
+          otp
+        })
+      })
+
+      const data = await verify.json()
+
+      if (!verify.ok) {
+        throw new Error(data.error || 'Invalid OTP')
+      }
+
+      // ✅ Save lead ONLY after OTP verified
+      await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      })
+
+      // ✅ MARK USER AS VERIFIED
+      setVerifiedUser(true)
+      localStorage.setItem('verified_lead', 'true')
+
+      // ✅ CLEAN UP OTP UI
+      setShowOtpForm(false)
+      setOtp('')
+      setOtpSent(false)
+
+      // optional reset
+      setResendTimer(30)
+      setResendCount(0)
+
+      toast.success('OTP verified! Our team will contact you shortly.')
+    } catch (err) {
+      toast.error(err.message || 'OTP verification failed')
+    } finally {
+      setIsSubmitting(false)
     }
   }
+
+
+  useEffect(() => {
+    let timer
+
+    if (otpSent && resendTimer > 0) {
+      timer = setTimeout(() => {
+        setResendTimer(prev => prev - 1)
+      }, 1000)
+    }
+
+    return () => clearTimeout(timer)
+  }, [otpSent, resendTimer])
+
+  const isOtpValid = otp.length === 6
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -264,7 +373,7 @@ export default function PropertyDetail() {
               <span className="font-semibold">Back</span>
             </Link>
             <div className="flex items-center space-x-2">
-              <Image src='/logo/nav_logo_edited.svg' alt='logo' width={300} height={100} className="lg:h-[80px] lg:w-[200px] w-[100px] h-[60px]"/>
+              <Image src='/logo/nav_logo_edited.svg' alt='logo' width={300} height={100} className="lg:h-[80px] lg:w-[200px] w-[100px] h-[60px]" />
             </div>
           </div>
         </div>
@@ -275,22 +384,21 @@ export default function PropertyDetail() {
         <div className="container mx-auto px-4 py-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="md:col-span-2">
-              <img 
-                src={property.gallery[selectedImage]} 
+              <img
+                src={property.gallery[selectedImage]}
                 alt={property.name}
                 className="w-full h-[500px] object-cover rounded-lg"
               />
             </div>
             <div className="grid grid-cols-2 md:grid-cols-1 gap-4">
               {property.gallery.slice(0, 4).map((img, idx) => (
-                <img 
+                <img
                   key={idx}
-                  src={img} 
+                  src={img}
                   alt={`Gallery ${idx + 1}`}
                   onClick={() => setSelectedImage(idx)}
-                  className={`w-full h-[120px] object-cover rounded-lg cursor-pointer transition-all ${
-                    selectedImage === idx ? 'ring-4 ring-teal-500' : 'hover:opacity-75'
-                  }`}
+                  className={`w-full h-[120px] object-cover rounded-lg cursor-pointer transition-all ${selectedImage === idx ? 'ring-4 ring-teal-500' : 'hover:opacity-75'
+                    }`}
                 />
               ))}
             </div>
@@ -324,7 +432,7 @@ export default function PropertyDetail() {
                     </Button>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center gap-4 mb-4">
                   <span className="bg-teal-100 text-teal-700 px-4 py-2 rounded-full font-semibold">{property.status}</span>
                   <span className="text-gray-600">RERA: {property.rera}</span>
@@ -436,55 +544,143 @@ export default function PropertyDetail() {
           <div className="lg:col-span-1">
             <Card className="sticky top-24">
               <CardContent className="p-6">
-                <h3 className="text-xl font-bold text-gray-800 mb-4">Interested in this property?</h3>
-                <p className="text-gray-600 mb-4">Get a free consultation and evaluation report</p>
-                
-                <form onSubmit={handleContactSubmit} className="space-y-4">
-                  <Input 
-                    placeholder="Your Name *"
-                    value={formData.name}
-                    onChange={(e) => setFormData({...formData, name: e.target.value})}
-                    required
-                  />
-                  <Input 
-                    placeholder="Phone Number *"
-                    type="tel"
-                    maxLength={10}
-                    value={formData.phone}
-                    onChange={(e) => setFormData({...formData, phone: e.target.value.replace(/\D/g, '')})}
-                    required
-                  />
-                  <Input 
-                    placeholder="Email (Optional)"
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  />
-                  <Button type="submit" className="w-full bg-teal-600 hover:bg-teal-700 py-6 text-lg">
-                    Get Free Consultation
-                  </Button>
-                </form>
+                {
+                  verifiedUser ? <div className="text-center py-6">
+                    <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
+                      <Check className="h-8 w-8 text-green-600" />
+                    </div>
 
-                <div className="mt-6 space-y-3">
-                  <Button variant="outline" className="w-full" onClick={() => window.location.href='tel:+919930047748'}>
-                    <Phone className="w-5 h-5 mr-2" />
-                    Call Now
-                  </Button>
-                  <Button variant="outline" className="w-full" onClick={() => window.location.href='mailto:info@rajasthanrealestate.com'}>
-                    <Mail className="w-5 h-5 mr-2" />
-                    Email Us
-                  </Button>
-                </div>
+                    <h3 className="text-xl font-bold text-gray-800 mb-2">
+                      We’ve received your interest 🎉
+                    </h3>
 
-                <div className="mt-6 p-4 bg-teal-50 rounded-lg">
-                  <h4 className="font-bold text-teal-800 mb-2">🎁 Special Offers</h4>
-                  <ul className="text-sm text-teal-700 space-y-1">
-                    <li>✓ Free site visit</li>
-                    <li>✓ Free property evaluation</li>
-                    <li>✓ Exclusive discounts</li>
-                    <li>✓ Home loan assistance</li>
-                  </ul>
-                </div>
+                    <p className="text-gray-600 text-sm mb-4">
+                      Our property expert will reach out to you shortly with
+                      complete details and exclusive offers.
+                    </p>
+
+                    <div className="text-sm text-gray-500">
+                      📞 You can also call us directly if you need immediate assistance.
+                    </div>
+                    <div className="mt-4 space-y-3">
+                      <Button variant="outline" className="w-full" onClick={() => window.location.href = 'tel:+919930047748'}>
+                        <Phone className="w-5 h-5 mr-2" />
+                        Call Now
+                      </Button>
+                    </div>
+                  </div> :
+                    <>
+                      <h3 className="text-xl font-bold text-gray-800 mb-4">Interested in this property?</h3>
+                      <p className="text-gray-600 mb-4">Get a free consultation and evaluation report</p>
+
+                      <form className="space-y-4">
+                        {!showOtpForm ? (
+                          <>
+                            <Input
+                              placeholder="Your Name *"
+                              value={formData.name}
+                              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                              required
+                            />
+
+                            <Input
+                              placeholder="Phone Number *"
+                              type="tel"
+                              maxLength={10}
+                              value={formData.phone}
+                              onChange={(e) =>
+                                setFormData({ ...formData, phone: e.target.value.replace(/\D/g, '') })
+                              }
+                              required
+                            />
+
+                            <Input
+                              placeholder="Email (Optional)"
+                              type="email"
+                              value={formData.email}
+                              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                            />
+
+                            <Button
+                              onClick={(e) => {
+                                e.preventDefault()
+                                handleSendOtp()
+                              }}
+                              disabled={isSendingOtp || otpSent}
+                              className="w-full bg-teal-600 py-6 text-lg"
+                            >
+                              {isSendingOtp ? 'Sending OTP...' : 'Get Free Consultation'}
+                            </Button>
+
+                          </>
+                        ) : (
+                          <>
+                            <p className="text-sm text-center text-gray-600">
+                              OTP sent to {formData.phone}
+                            </p>
+
+                            <Input
+                              placeholder="Enter OTP"
+                              maxLength={6}
+                              value={otp}
+                              onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
+                              className="text-center text-xl tracking-widest"
+                            />
+
+                            <Button
+                              type="button"
+                              className="w-full bg-teal-600 py-6"
+                              onClick={handleVerifyOtp}
+                              disabled={isSubmitting || !otpSent}
+                            >
+                              {isSubmitting ? 'Verifying...' : 'Verify & Submit'}
+                            </Button>
+                            {otpSent && (
+                              <div className="text-center text-sm mt-2">
+                                {resendTimer > 0 ? (
+                                  <span className="text-gray-500">
+                                    Resend OTP in {resendTimer}s
+                                  </span>
+                                ) : resendCount < 2 ? (
+                                  <button
+                                    onClick={(e) => {
+                                      e.preventDefault()
+                                      handleSendOtp()
+                                    }}
+                                    className="text-teal-600 font-semibold underline"
+                                  >
+                                    Resend OTP
+                                  </button>
+                                ) : (
+                                  <span className="text-red-500">
+                                    OTP limit reached
+                                  </span>
+                                )}
+                              </div>
+                            )}
+
+                          </>
+                        )}
+                      </form>
+
+                      <div className="mt-4 space-y-3">
+                        <Button variant="outline" className="w-full" onClick={() => window.location.href = 'tel:+919930047748'}>
+                          <Phone className="w-5 h-5 mr-2" />
+                          Call Now
+                        </Button>
+                      </div>
+
+                      <div className="mt-6 p-4 bg-teal-50 rounded-lg">
+                        <h4 className="font-bold text-teal-800 mb-2">🎁 Special Offers</h4>
+                        <div className="text-sm text-teal-700 space-y-1">
+                          <div className='flex gap-2'><Check className="w-5 h-5" /> <span>Free site visit</span></div>
+                          <div className='flex gap-2'><Check className="w-5 h-5" /> <span>Free property evaluation</span></div>
+                          <div className='flex gap-2'><Check className="w-5 h-5" /> <span>Exclusive discounts</span></div>
+                          <div className='flex gap-2'><Check className="w-5 h-5" /> <span>Home loan assistance</span></div>
+                        </div>
+                      </div>
+                    </>
+                }
               </CardContent>
             </Card>
           </div>
