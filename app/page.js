@@ -13,20 +13,20 @@ import { toast } from "sonner"
 const newProjects = [
   {
     id: 1,
-    slug: 'lodha-amara-jogeshwari',
-    name: 'Lodha Amara',
+    slug: 'lodha-sovrano-jogeshwari',
+    name: 'Lodha Sovrano',
     builder: 'Lodha Group',
     location: 'Jogeshwari West, Mumbai',
-    price: '₹1.2 - 2.5 Cr',
-    pricePerSqft: '₹18,500',
-    type: '2, 3 BHK Apartments',
-    possession: 'Dec 2025',
-    area: '650 - 1200 sq.ft',
+    price: '₹3.1 - 4.3 Cr',
+    pricePerSqft: '₹31,400',
+    type: '2.5, 3, 3.5, Duplex & Penthouse',
+    possession: 'Dec 2026',
+    area: '998 - 1394 sq.ft',
     image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&h=600&fit=crop',
     featured: true,
-    amenities: ['Swimming Pool', 'Gym', 'Clubhouse', 'Garden', 'Security', 'Parking'],
+    amenities: ['Cafe', 'Library Lounge','Activity Room', 'Crèche', 'Gym', 'Indoor Pool', 'Pickleball Court', `kid's Play Area`, 'Community hall', 'Pet walk area'],
     status: 'Under Construction',
-    rera: 'P51800012345'
+    rera: 'PR1180002501771, PR1180002501743, PR1180002501764'
   },
   {
     id: 2,

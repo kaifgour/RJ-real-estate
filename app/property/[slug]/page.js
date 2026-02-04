@@ -13,16 +13,16 @@ import { normalizePropertyName } from '@/lib/utils'
 import Image from 'next/image'
 
 const propertyDetails = {
-  'lodha-amara-jogeshwari': {
+  'lodha-sovrano-jogeshwari': {
     id: 1,
-    name: 'Lodha Amara',
+    name: 'Lodha Sovrano',
     builder: 'Lodha Group',
     location: 'Jogeshwari West, Mumbai',
-    price: '₹1.2 - 2.5 Cr',
-    pricePerSqft: '₹18,500',
-    type: '2, 3 BHK Apartments',
-    possession: 'Dec 2025',
-    area: '650 - 1200 sq.ft',
+    price: '₹3.1 - 4.3 Cr',
+    pricePerSqft: '₹31,400',
+    type: '2.5, 3, 3.5, Duplex & Penthouse',
+    possession: 'Dec 2026',
+    area: '998 - 1394 sq.ft',
     image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&h=800&fit=crop',
     gallery: [
       'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&h=600&fit=crop',
@@ -31,13 +31,10 @@ const propertyDetails = {
       'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop'
     ],
     status: 'Under Construction',
-    rera: 'P51800012345',
-    description: 'Lodha Amara is a premium residential project offering world-class amenities and modern architecture. Located in the heart of Jogeshwari West, it provides excellent connectivity to major business hubs and entertainment centers.',
+    rera: 'PR1180002501771, PR1180002501743, PR1180002501764',
+    description: 'In the heart of Jogeshwari, Patel Estate, lies a pristine gem, the likes of which this neighbourhood has never seen before. An estate dedicated to vast open spaces, inviting you to live without boundaries. Lodha Sovrano rises as an address of rare distinction.',
     amenities: [
-      'Swimming Pool', 'Gym & Fitness Center', 'Clubhouse', 'Landscaped Gardens',
-      '24/7 Security', 'Children Play Area', 'Jogging Track', 'Indoor Games Room',
-      'Party Hall', 'Amphitheater', 'Yoga Deck', 'Multipurpose Court',
-      'Visitor Parking', 'Power Backup', 'Intercom Facility', 'Lift'
+      'Cafe', 'Library Lounge','Activity Room', 'Crèche', 'Gym', 'Indoor Pool', 'Pickleball Court', `kid's Play Area`, 'Community hall', 'Pet walk area',
     ],
     specifications: [
       { label: 'Total Towers', value: '4 Towers' },
@@ -76,7 +73,7 @@ const propertyDetails = {
       }
     ],
     nearbyPlaces: [
-      { name: 'Jogeshwari Metro Station', distance: '0.5 km', type: 'Metro' },
+      { name: 'Oberoi International School', distance: '10 minutes', type: 'School' },
       { name: 'JVPD Scheme', distance: '2 km', type: 'Locality' },
       { name: 'Infinity Mall', distance: '1.5 km', type: 'Shopping' },
       { name: 'Kokilaben Hospital', distance: '3 km', type: 'Hospital' },
