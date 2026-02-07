@@ -59,7 +59,7 @@ export default function PropertyDetail() {
       const res = await fetch('/api/otp/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone: formData.phone })
+        body: JSON.stringify({ phone: formData.phone, name: formData.name, email: formData.email, property: property.slug })
       })
 
       if (!res.ok) {

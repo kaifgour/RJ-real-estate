@@ -51,7 +51,7 @@ export default function Home() {
       const res = await fetch('/api/otp/send', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone: leadData.phone })
+        body: JSON.stringify({ phone: leadData.phone, name: leadData.name, email: leadData.email })
       })
 
       if (!res.ok) {

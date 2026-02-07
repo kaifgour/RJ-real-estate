@@ -20,14 +20,21 @@ export async function POST(req) {
       return NextResponse.json({ error: 'Invalid phone' }, { status: 400 })
     }
 
-    const { error } = await supabase.from('leads').insert({
-      name,
-      phone,
-      email,
-      property,
-      otp_sent: true,
-      status: 'drop_off'
-    })
+    const { error } = await supabase
+      .from('leads')
+      .upsert(
+        {
+          name,
+          email,
+          phone,
+          property,
+          status: 'drop_off',
+          otp_sent: true,
+          otp_verified: false
+        },
+        { onConflict: 'phone' }
+      )
+
 
     if (error) {
       console.error('Supabase insert error:', error)
