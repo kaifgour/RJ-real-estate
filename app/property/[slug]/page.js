@@ -9,222 +9,8 @@ import { Input } from '@/components/ui/input'
 import Link from 'next/link'
 import { toast } from "sonner"
 import { normalizePropertyName } from '@/lib/utils'
-
+import { propertyDetails } from '@/data/properties'
 import Image from 'next/image'
-
-const propertyDetails = {
-  'lodha-sovrano-jogeshwari': {
-    id: 1,
-    name: 'Lodha Sovrano',
-    builder: 'Lodha Group',
-    location: 'Jogeshwari West, Mumbai',
-    price: '₹3.1 - 4.3 Cr',
-    pricePerSqft: '₹31,400',
-    type: '2.5, 3, 3.5, Duplex & Penthouse',
-    possession: 'Dec 2026',
-    area: '998 - 1394 sq.ft',
-    image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1200&h=800&fit=crop',
-    gallery: [
-      'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop'
-    ],
-    status: 'Under Construction',
-    rera: 'PR1180002501771, PR1180002501743, PR1180002501764',
-    description: 'In the heart of Jogeshwari, Patel Estate, lies a pristine gem, the likes of which this neighbourhood has never seen before. An estate dedicated to vast open spaces, inviting you to live without boundaries. Lodha Sovrano rises as an address of rare distinction.',
-    amenities: [
-      'Cafe', 'Library Lounge','Activity Room', 'Crèche', 'Gym', 'Indoor Pool', 'Pickleball Court', `kid's Play Area`, 'Community hall', 'Pet walk area',
-    ],
-    specifications: [
-      { label: 'Total Towers', value: '4 Towers' },
-      { label: 'Total Floors', value: '25 Floors' },
-      { label: 'Total Units', value: '320 Units' },
-      { label: 'Apartment Types', value: '2 BHK, 3 BHK' },
-      { label: 'Floor Area', value: '650 - 1200 sq.ft' },
-      { label: 'Open Parking', value: 'Available' },
-      { label: 'Covered Parking', value: 'Available' },
-      { label: 'Project Status', value: 'Under Construction' }
-    ],
-    floorPlans: [
-      {
-        type: '2 BHK',
-        area: '650 sq.ft',
-        price: '₹1.2 Cr',
-        image: 'https://images.unsplash.com/photo-1503174971373-b1f69850bded?w=600&h=400&fit=crop'
-      },
-      {
-        type: '2 BHK Premium',
-        area: '850 sq.ft',
-        price: '₹1.57 Cr',
-        image: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&h=400&fit=crop'
-      },
-      {
-        type: '3 BHK',
-        area: '1050 sq.ft',
-        price: '₹1.94 Cr',
-        image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&h=400&fit=crop'
-      },
-      {
-        type: '3 BHK Premium',
-        area: '1200 sq.ft',
-        price: '₹2.22 Cr',
-        image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop'
-      }
-    ],
-    nearbyPlaces: [
-      { name: 'Oberoi International School', distance: '10 minutes', type: 'School' },
-      { name: 'JVPD Scheme', distance: '2 km', type: 'Locality' },
-      { name: 'Infinity Mall', distance: '1.5 km', type: 'Shopping' },
-      { name: 'Kokilaben Hospital', distance: '3 km', type: 'Hospital' },
-      { name: 'Ryan International School', distance: '1 km', type: 'School' },
-      { name: 'Western Express Highway', distance: '0.8 km', type: 'Highway' }
-    ]
-  },
-  'oberoi-enigma-jogeshwari': {
-    id: 2,
-    name: 'Oberoi Enigma',
-    builder: 'Oberoi Realty',
-    location: 'Jogeshwari East, Mumbai',
-    price: '₹2.8 - 4.5 Cr',
-    pricePerSqft: '₹22,000',
-    type: '3, 4 BHK Apartments',
-    possession: 'Jun 2026',
-    area: '1100 - 1800 sq.ft',
-    image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1200&h=800&fit=crop',
-    gallery: [
-      'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop'
-    ],
-    status: 'New Launch',
-    rera: 'P51800023456',
-    description: 'Oberoi Enigma brings ultra-luxury living to Jogeshwari East. With meticulously designed apartments and world-class amenities, this project sets new standards in premium residential living.',
-    amenities: [
-      'Olympic Size Swimming Pool', 'State-of-art Gym', 'Tennis Court', 'Squash Court',
-      'Luxury Spa', 'Private Theatre', 'Business Center', 'Concierge Service',
-      'Banquet Hall', 'Sky Lounge', 'Meditation Zone', 'Indoor Badminton Court',
-      'Jogging Track', 'Cricket Pitch', 'Basketball Court', 'Kids Play Zone',
-      'Senior Citizens Area', '24/7 Security', 'Video Door Phone', 'Smart Home Features'
-    ],
-    specifications: [
-      { label: 'Total Towers', value: '3 Towers' },
-      { label: 'Total Floors', value: '32 Floors' },
-      { label: 'Total Units', value: '280 Units' },
-      { label: 'Apartment Types', value: '3 BHK, 4 BHK' },
-      { label: 'Floor Area', value: '1100 - 1800 sq.ft' },
-      { label: 'Parking', value: '2 Covered Parking per flat' },
-      { label: 'Project Status', value: 'New Launch' },
-      { label: 'Club House', value: '50,000 sq.ft' }
-    ],
-    floorPlans: [
-      {
-        type: '3 BHK',
-        area: '1100 sq.ft',
-        price: '₹2.42 Cr',
-        image: 'https://images.unsplash.com/photo-1503174971373-b1f69850bded?w=600&h=400&fit=crop'
-      },
-      {
-        type: '3 BHK Premium',
-        area: '1350 sq.ft',
-        price: '₹2.97 Cr',
-        image: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&h=400&fit=crop'
-      },
-      {
-        type: '4 BHK',
-        area: '1600 sq.ft',
-        price: '₹3.52 Cr',
-        image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&h=400&fit=crop'
-      },
-      {
-        type: '4 BHK Penthouse',
-        area: '1800 sq.ft',
-        price: '₹3.96 Cr',
-        image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop'
-      }
-    ],
-    nearbyPlaces: [
-      { name: 'Jogeshwari Railway Station', distance: '1 km', type: 'Railway' },
-      { name: 'Mumbai Airport', distance: '4 km', type: 'Airport' },
-      { name: 'Raheja Mall', distance: '2 km', type: 'Shopping' },
-      { name: 'Nanavati Hospital', distance: '3.5 km', type: 'Hospital' },
-      { name: 'DPS School', distance: '1.2 km', type: 'School' },
-      { name: 'Link Road', distance: '0.5 km', type: 'Highway' }
-    ]
-  },
-  'godrej-summit-jogeshwari': {
-    id: 3,
-    name: 'Godrej Summit',
-    builder: 'Godrej Properties',
-    location: 'Jogeshwari West, Mumbai',
-    price: '₹95 L - 1.8 Cr',
-    pricePerSqft: '₹16,800',
-    type: '1, 2 BHK Apartments',
-    possession: 'Mar 2026',
-    area: '550 - 950 sq.ft',
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&h=800&fit=crop',
-    gallery: [
-      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1460317442991-0ec209397118?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=800&h=600&fit=crop',
-      'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop'
-    ],
-    status: 'Under Construction',
-    rera: 'P51800034567',
-    description: 'Godrej Summit offers affordable luxury in the prime location of Jogeshwari West. Perfect for first-time homebuyers and young professionals looking for quality living spaces.',
-    amenities: [
-      'Swimming Pool', 'Gym', 'Landscaped Garden', 'Jogging Track',
-      '24/7 Security', 'Children Play Area', 'Indoor Games', 'Yoga Area',
-      'Community Hall', 'Visitor Parking', 'Power Backup', 'Intercom',
-      'Fire Fighting Systems', 'Lift', 'Rainwater Harvesting'
-    ],
-    specifications: [
-      { label: 'Total Towers', value: '2 Towers' },
-      { label: 'Total Floors', value: '18 Floors' },
-      { label: 'Total Units', value: '240 Units' },
-      { label: 'Apartment Types', value: '1 BHK, 2 BHK' },
-      { label: 'Floor Area', value: '550 - 950 sq.ft' },
-      { label: 'Parking', value: '1 Covered per flat' },
-      { label: 'Project Status', value: 'Under Construction' },
-      { label: 'Completion', value: 'Mar 2026' }
-    ],
-    floorPlans: [
-      {
-        type: '1 BHK',
-        area: '550 sq.ft',
-        price: '₹92 L',
-        image: 'https://images.unsplash.com/photo-1503174971373-b1f69850bded?w=600&h=400&fit=crop'
-      },
-      {
-        type: '1 BHK Premium',
-        area: '650 sq.ft',
-        price: '₹1.09 Cr',
-        image: 'https://images.unsplash.com/photo-1484154218962-a197022b5858?w=600&h=400&fit=crop'
-      },
-      {
-        type: '2 BHK',
-        area: '800 sq.ft',
-        price: '₹1.34 Cr',
-        image: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&h=400&fit=crop'
-      },
-      {
-        type: '2 BHK Premium',
-        area: '950 sq.ft',
-        price: '₹1.60 Cr',
-        image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop'
-      }
-    ],
-    nearbyPlaces: [
-      { name: 'Jogeshwari Metro', distance: '0.8 km', type: 'Metro' },
-      { name: 'Lokhandwala Market', distance: '2.5 km', type: 'Shopping' },
-      { name: 'Shoppers Stop', distance: '1.8 km', type: 'Shopping' },
-      { name: 'Shushrusha Hospital', distance: '2 km', type: 'Hospital' },
-      { label: 'St. Xavier School', distance: '1.5 km', type: 'School' },
-      { name: 'SV Road', distance: '0.6 km', type: 'Main Road' }
-    ]
-  }
-}
 
 export default function PropertyDetail() {
   const params = useParams()
@@ -243,6 +29,9 @@ export default function PropertyDetail() {
   const [resendCount, setResendCount] = useState(0)
   const [isSendingOtp, setIsSendingOtp] = useState(false)
   const [verifiedUser, setVerifiedUser] = useState(false)
+  const [previewImage, setPreviewImage] = useState(null);
+  const [activeGalleryIndex, setActiveGalleryIndex] = useState(0);
+
 
 
   useEffect(() => {
@@ -382,7 +171,7 @@ export default function PropertyDetail() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="md:col-span-2">
               <img
-                src={property.gallery[selectedImage]}
+                src={property.gallery[activeGalleryIndex]}
                 alt={property.name}
                 className="w-full h-[500px] object-cover rounded-lg"
               />
@@ -393,7 +182,7 @@ export default function PropertyDetail() {
                   key={idx}
                   src={img}
                   alt={`Gallery ${idx + 1}`}
-                  onClick={() => setSelectedImage(idx)}
+                  onClick={() => setActiveGalleryIndex(idx)}
                   className={`w-full h-[120px] object-cover rounded-lg cursor-pointer transition-all ${selectedImage === idx ? 'ring-4 ring-teal-500' : 'hover:opacity-75'
                     }`}
                 />
@@ -471,7 +260,7 @@ export default function PropertyDetail() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {property.floorPlans.map((plan, idx) => (
                     <div key={idx} className="border rounded-lg overflow-hidden hover:shadow-lg transition-all">
-                      <img src={plan.image} alt={plan.type} className="w-full h-48 object-cover" />
+                      <img src={plan.image} alt={plan.type} className="w-full h-48 object-cover" onClick={() => setPreviewImage(plan.image)} />
                       <div className="p-4 bg-gray-50">
                         <h3 className="font-bold text-lg mb-2">{plan.type}</h3>
                         <div className="flex justify-between items-center">
@@ -484,6 +273,31 @@ export default function PropertyDetail() {
                 </div>
               </CardContent>
             </Card>
+            {previewImage && (
+              <div
+                className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center"
+                onClick={() => setPreviewImage(null)}
+              >
+                <div
+                  className="relative max-w-4xl w-full mx-4"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <button
+                    className="absolute -top-10 right-0 text-white text-3xl"
+                    onClick={() => setPreviewImage(null)}
+                  >
+                    ✕
+                  </button>
+
+                  <img
+                    src={previewImage}
+                    alt="Floor Plan Preview"
+                    className="w-full max-h-[80vh] object-contain rounded-lg shadow-lg"
+                  />
+                </div>
+              </div>
+            )}
+
 
             {/* Amenities */}
             <Card>

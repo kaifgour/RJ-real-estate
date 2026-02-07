@@ -2,7 +2,7 @@ import './globals.css'
 import { Toaster } from "@/components/ui/sonner"
 
 export const metadata = {
-  title: 'Next.js MongoDB Template',
+  title: '',
   description: 'A simple template with App Router, MongoDB, and shadcn/ui',
 }
 

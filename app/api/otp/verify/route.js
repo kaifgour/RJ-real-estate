@@ -24,6 +24,15 @@ export async function POST(req) {
       )
     }
 
+    await supabase
+      .from('leads')
+      .update({
+        otp_verified: true,
+        status: 'verified',
+        verified_at: new Date().toISOString()
+      })
+      .eq('phone', phone)
+
     return NextResponse.json({ success: true })
   } catch (error) {
     console.error(error)

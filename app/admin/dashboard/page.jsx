@@ -12,6 +12,7 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true)
   const [leads, setLeads] = useState([])
   const [search, setSearch] = useState('')
+  const [activeTab, setActiveTab] = useState('verified') // 👈 tab state
 
   // 🔐 Auth guard
   useEffect(() => {
@@ -39,9 +40,15 @@ export default function AdminDashboard() {
     if (!error) setLeads(data)
   }
 
-  const filteredLeads = leads.filter(l =>
-    l.name.toLowerCase().includes(search.toLowerCase()) ||
-    l.phone.includes(search) ||
+  // 🔎 Status filter
+  const statusFilteredLeads = leads.filter(
+    lead => lead.status === activeTab
+  )
+
+  // 🔎 Search filter
+  const filteredLeads = statusFilteredLeads.filter(l =>
+    (l.name || '').toLowerCase().includes(search.toLowerCase()) ||
+    (l.phone || '').includes(search) ||
     (l.email || '').toLowerCase().includes(search.toLowerCase())
   )
 
@@ -62,9 +69,11 @@ export default function AdminDashboard() {
         <div className="flex gap-3">
           <Button
             variant="outline"
-            onClick={() => supabase.auth.signOut().then(() => {
-              router.replace('/admin/login')
-            })}
+            onClick={() =>
+              supabase.auth.signOut().then(() => {
+                router.replace('/admin/login')
+              })
+            }
           >
             Logout
           </Button>
@@ -73,6 +82,31 @@ export default function AdminDashboard() {
             Export Excel
           </Button>
         </div>
+      </div>
+
+      {/* Tabs */}
+      <div className="flex gap-4 mb-4">
+        <button
+          onClick={() => setActiveTab('verified')}
+          className={`px-4 py-2 rounded-lg font-medium ${
+            activeTab === 'verified'
+              ? 'bg-teal-600 text-white'
+              : 'bg-gray-100 text-gray-700'
+          }`}
+        >
+          Verified Leads ({leads.filter(l => l.status === 'verified').length})
+        </button>
+
+        <button
+          onClick={() => setActiveTab('drop_off')}
+          className={`px-4 py-2 rounded-lg font-medium ${
+            activeTab === 'drop_off'
+              ? 'bg-orange-500 text-white'
+              : 'bg-gray-100 text-gray-700'
+          }`}
+        >
+          Drop-off Leads ({leads.filter(l => l.status === 'drop_off').length})
+        </button>
       </div>
 
       {/* Search */}
@@ -91,19 +125,25 @@ export default function AdminDashboard() {
               <th className="p-3">Phone</th>
               <th className="p-3">Email</th>
               <th className="p-3">Property</th>
-              <th className="p-3">Date</th>
+              <th className="p-3">
+                {activeTab === 'verified' ? 'Verified At' : 'Created At'}
+              </th>
             </tr>
           </thead>
 
           <tbody>
             {filteredLeads.map(lead => (
               <tr key={lead.id} className="border-t">
-                <td className="p-3">{lead.name}</td>
+                <td className="p-3">{lead.name || '-'}</td>
                 <td className="p-3">{lead.phone}</td>
                 <td className="p-3">{lead.email || '-'}</td>
                 <td className="p-3">{lead.property || '-'}</td>
                 <td className="p-3">
-                  {new Date(lead.created_at).toLocaleString()}
+                  {new Date(
+                    activeTab === 'verified'
+                      ? lead.verified_at
+                      : lead.created_at
+                  ).toLocaleString()}
                 </td>
               </tr>
             ))}
