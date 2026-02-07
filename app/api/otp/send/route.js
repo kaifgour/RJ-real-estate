@@ -1,23 +1,26 @@
 import { NextResponse } from 'next/server'
 import twilio from 'twilio'
-import { supabase } from '@/lib/supabaseClient'
+import { createClient } from '@supabase/supabase-js'
 
 const client = twilio(
   process.env.TWILIO_ACCOUNT_SID,
   process.env.TWILIO_AUTH_TOKEN
 )
 
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_ROLE_KEY
+)
+
 export async function POST(req) {
   try {
-    const { phone, name, email, property } = await req.json()
+    const { name, phone, email, property } = await req.json()
 
     if (!phone || phone.length !== 10) {
-      return NextResponse.json(
-        { error: 'Invalid phone number' },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: 'Invalid phone' }, { status: 400 })
     }
-    await supabase.from('leads').insert({
+
+    const { error } = await supabase.from('leads').insert({
       name,
       phone,
       email,
@@ -26,6 +29,10 @@ export async function POST(req) {
       status: 'drop_off'
     })
 
+    if (error) {
+      console.error('Supabase insert error:', error)
+      return NextResponse.json({ error: 'DB insert failed' }, { status: 500 })
+    }
 
     await client.verify.v2
       .services(process.env.TWILIO_VERIFY_SID)
@@ -35,11 +42,8 @@ export async function POST(req) {
       })
 
     return NextResponse.json({ success: true })
-  } catch (error) {
-    console.error(error)
-    return NextResponse.json(
-      { error: 'Failed to send WhatsApp OTP' },
-      { status: 500 }
-    )
+  } catch (err) {
+    console.error(err)
+    return NextResponse.json({ error: 'OTP send failed' }, { status: 500 })
   }
 }
