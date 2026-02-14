@@ -48,12 +48,7 @@ export default function PropertyDetail() {
       return
     }
 
-    if (resendCount >= 2) {
-      toast.error('OTP limit reached. Please try later.')
-      return
-    }
-
-    setIsSendingOtp(true)
+    // setIsSendingOtp(true)
 
     try {
       const res = await fetch('/api/otp/send', {
@@ -63,12 +58,24 @@ export default function PropertyDetail() {
       })
 
       if (!res.ok) {
-        toast.error('Failed to send OTP')
+        toast.error('something went wrong')
         setIsSendingOtp(false)
         return
       }
 
-      toast.success('OTP sent successfully')
+       setVerifiedUser(true)
+      localStorage.setItem('verified_lead', 'true')
+
+      // ✅ CLEAN UP OTP UI
+      setShowOtpForm(false)
+      setOtp('')
+      setOtpSent(false)
+
+      // optional reset
+      setResendTimer(30)
+      setResendCount(0)
+
+      toast.success('We have received your interest. We will reach out to you shortly.')
 
       setOtpSent(true)
       setShowOtpForm(true)
@@ -385,7 +392,6 @@ export default function PropertyDetail() {
                       <p className="text-gray-600 mb-4">Get a free consultation and evaluation report</p>
 
                       <form className="space-y-4">
-                        {!showOtpForm ? (
                           <>
                             <Input
                               placeholder="Your Name *"
@@ -424,54 +430,6 @@ export default function PropertyDetail() {
                             </Button>
 
                           </>
-                        ) : (
-                          <>
-                            <p className="text-sm text-center text-gray-600">
-                              OTP sent to {formData.phone}
-                            </p>
-
-                            <Input
-                              placeholder="Enter OTP"
-                              maxLength={6}
-                              value={otp}
-                              onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
-                              className="text-center text-xl tracking-widest"
-                            />
-
-                            <Button
-                              type="button"
-                              className="w-full bg-teal-600 py-6"
-                              onClick={handleVerifyOtp}
-                              disabled={isSubmitting || !otpSent}
-                            >
-                              {isSubmitting ? 'Verifying...' : 'Verify & Submit'}
-                            </Button>
-                            {otpSent && (
-                              <div className="text-center text-sm mt-2">
-                                {resendTimer > 0 ? (
-                                  <span className="text-gray-500">
-                                    Resend OTP in {resendTimer}s
-                                  </span>
-                                ) : resendCount < 2 ? (
-                                  <button
-                                    onClick={(e) => {
-                                      e.preventDefault()
-                                      handleSendOtp()
-                                    }}
-                                    className="text-teal-600 font-semibold underline"
-                                  >
-                                    Resend OTP
-                                  </button>
-                                ) : (
-                                  <span className="text-red-500">
-                                    OTP limit reached
-                                  </span>
-                                )}
-                              </div>
-                            )}
-
-                          </>
-                        )}
                       </form>
 
                       <div className="mt-4 space-y-3">

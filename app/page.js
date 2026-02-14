@@ -9,7 +9,7 @@ import WhatsAppButton from '@/components/ui/WhatsappButton'
 import Link from 'next/link'
 import Image from 'next/image'
 import { toast } from "sonner"
-import { newProjects , resaleProperties } from '@/data/properties'
+import { newProjects, resaleProperties } from '@/data/properties'
 
 export default function Home() {
   const [showLeadForm, setShowLeadForm] = useState(false)
@@ -39,13 +39,17 @@ export default function Home() {
       toast.error('Enter name and phone')
       return
     }
+    if (leadData.phone.length !== 10) {
+      toast.error('Enter valid phone number')
+      return
+    }
 
     if (resendCount >= 2) {
       toast.error('OTP limit reached. Please try later.')
       return
     }
 
-    setIsSendingOtp(true)
+    // setIsSendingOtp(true)
 
     try {
       const res = await fetch('/api/otp/send', {
@@ -54,66 +58,67 @@ export default function Home() {
         body: JSON.stringify({ phone: leadData.phone, name: leadData.name, email: leadData.email })
       })
 
+      console.log(res, 'ressssssss');
+
       if (!res.ok) {
-        toast.error('Failed to send OTP')
+        toast.error('something went wrong')
         setIsSendingOtp(false)
         return
       }
 
-      toast.success('OTP sent successfully')
+      toast.success('We have received your interest. We will reach out to you shortly.')
 
-      setOtpSent(true)
-      setShowOtpForm(true)
-      setResendTimer(30)
-      setResendCount(prev => prev + 1)
-    } catch (err) {
-      toast.error('Something went wrong')
-    }
-
-    setIsSendingOtp(false)
-  }
-
-
-  const handleVerifyOtp = async () => {
-    if (otp.length !== 6) {
-      toast.error('Enter valid 6-digit OTP')
-      return
-    }
-    try {
-      setIsSubmitting(true)
-
-      const verify = await fetch('/api/otp/verify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          phone: leadData.phone,
-          otp
-        })
-      })
-
-      const data = await verify.json()
-
-      if (!verify.ok) {
-        throw new Error(data.error || 'Invalid OTP')
-      }
-
-      await fetch('/api/leads', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(leadData)
-      })
-
-      toast.success('OTP verified! We will contact you shortly.')
       setOtpSent(false)
       setResendTimer(30)
       setResendCount(0)
       setSubmitSuccess(true)
     } catch (err) {
-      toast.error(err.message || 'OTP verification failed')
-    } finally {
-      setIsSubmitting(false)
+      toast.error('Something went wrong')
     }
+
   }
+
+
+  // const handleVerifyOtp = async () => {
+  //   if (otp.length !== 6) {
+  //     toast.error('Enter valid 6-digit OTP')
+  //     return
+  //   }
+  //   try {
+  //     setIsSubmitting(true)
+
+  //     const verify = await fetch('/api/otp/verify', {
+  //       method: 'POST',
+  //       headers: { 'Content-Type': 'application/json' },
+  //       body: JSON.stringify({
+  //         phone: leadData.phone,
+  //         otp
+  //       })
+  //     })
+
+  //     const data = await verify.json()
+
+  //     if (!verify.ok) {
+  //       throw new Error(data.error || 'Invalid OTP')
+  //     }
+
+  //     await fetch('/api/leads', {
+  //       method: 'POST',
+  //       headers: { 'Content-Type': 'application/json' },
+  //       body: JSON.stringify(leadData)
+  //     })
+
+  //     toast.success('OTP verified! We will contact you shortly.')
+  //     setOtpSent(false)
+  //     setResendTimer(30)
+  //     setResendCount(0)
+  //     setSubmitSuccess(true)
+  //   } catch (err) {
+  //     toast.error(err.message || 'OTP verification failed')
+  //   } finally {
+  //     setIsSubmitting(false)
+  //   }
+  // }
 
 
 
@@ -269,6 +274,7 @@ export default function Home() {
           </div>
         </section>
 
+
         {/* Resale/Rent Section */}
         {/* <section id="resale-rent" className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
@@ -343,6 +349,49 @@ export default function Home() {
             </div> */}
         {/* </div>
         </section> */}
+
+        {/* About Us Section */}
+        <section id="about" className="py-20 bg-gradient-to-b from-white to-teal-50">
+          <div className="container mx-auto px-4">
+            <div className="grid grid-cols-1 items-center">
+              {/* Left Content */}
+              <div>
+                <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                  About Rajasthan Real Estate Solutions
+                </h2>
+
+                <p className="text-gray-600 text-lg mb-6 leading-relaxed">
+                  <span className="font-semibold text-teal-600">Rajasthan Real Estate Solutions</span>
+                  is a trusted name in the real estate industry, built on a strong foundation of integrity, transparency, and over 30+ years of experience. With deep-rooted knowledge of the local market and a commitment to excellence, we have been helping clients buy, sell, and invest in properties with confidence and peace of mind.
+                </p>
+
+                <p className="text-gray-600 text-lg mb-6 leading-relaxed">
+                  For more than three decades, we have successfully assisted families, investors, and businesses in finding the right residential, commercial, and investment properties in the western suburbs of Mumbai. Especially in and around Jogeshwari and Oshiwara. Our experience enables us to understand market trends, property valuation, legal procedures, and negotiation strategies — ensuring smooth and secure transactions every time.
+                </p>
+                <h3 className="text-3xl font-bold text-teal-600 mb-6">Our expertise</h3>
+                <div className="grid grid-cols-2 gap-6 mt-8">
+                  <div className="bg-white shadow-lg rounded-xl p-6 border hover:border-teal-500 transition">
+                    <h3 className="text-3xl font-bold text-teal-600">1000+</h3>
+                    <p className="text-gray-600">Residential Properties (Flats, Villas, Plots)</p>
+                  </div>
+                  <div className="bg-white shadow-lg rounded-xl p-6 border hover:border-teal-500 transition">
+                    <h3 className="text-3xl font-bold text-teal-600">50+</h3>
+                    <p className="text-gray-600">Top Builders</p>
+                  </div>
+                  <div className="bg-white shadow-lg rounded-xl p-6 border hover:border-teal-500 transition">
+                    <h3 className="text-3xl font-bold text-teal-600">500+</h3>
+                    <p className="text-gray-600">Properties Listed</p>
+                  </div>
+                  <div className="bg-white shadow-lg rounded-xl p-6 border hover:border-teal-500 transition">
+                    <h3 className="text-3xl font-bold text-teal-600">15+</h3>
+                    <p className="text-gray-600">Years Experience</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
 
         {/* Why Choose Us Section */}
         <section className="py-16 bg-white">
@@ -451,93 +500,36 @@ export default function Home() {
                         </div>
                       </div>
                     </div>
-
-                    {!showOtpForm ? (
-                      <div className="space-y-4">
-                        <Input
-                          placeholder="Your Name *"
-                          value={leadData.name}
-                          onChange={(e) => setLeadData({ ...leadData, name: e.target.value })}
-                          className="border-gray-300"
-                        />
-                        <Input
-                          placeholder="Phone Number *"
-                          type="tel"
-                          maxLength={10}
-                          value={leadData.phone}
-                          onChange={(e) => setLeadData({ ...leadData, phone: e.target.value.replace(/\D/g, '') })}
-                          className="border-gray-300"
-                        />
-                        <Input
-                          placeholder="Email (Optional)"
-                          type="email"
-                          value={leadData.email}
-                          onChange={(e) => setLeadData({ ...leadData, email: e.target.value })}
-                          className="border-gray-300"
-                        />
-                        <Button
-                          onClick={handleSendOtp}
-                          disabled={isSendingOtp || otpSent}
-                          className="w-full bg-teal-600 py-6 text-lg"
-                        >
-                          {isSendingOtp ? 'Sending OTP...' : 'Get OTP'}
-                        </Button>
-                      </div>
-                    ) : (
-                      <div className="space-y-4">
-                        <p className="text-center text-sm text-gray-600 mb-4">
-                          OTP sent to {leadData.phone}
-                        </p>
-                        <Input
-                          placeholder="Enter 6-digit OTP"
-                          maxLength={6}
-                          value={otp}
-                          onChange={(e) => setOtp(e.target.value.replace(/\D/g, ''))}
-                          className="text-center text-2xl tracking-widest border-gray-300"
-                        />
-                        <Button
-                          onClick={handleVerifyOtp}
-                          disabled={!isOtpValid || isSubmitting}
-                          className="w-full bg-teal-600 hover:bg-teal-700 py-6 text-lg"
-                        >
-                          {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Verify & Submit'}
-                        </Button>
-                        <Button
-                          onClick={() => {
-                            setShowOtpForm(false)
-                            setOtpSent(false)
-                            setResendTimer(30)
-                            setResendCount(0)
-                            setOtp('')
-                          }}
-                          variant="outline"
-                          className="w-full"
-                        >
-                          Change Number
-                        </Button>
-                        {otpSent && (
-                          <div className="text-center text-sm mt-2">
-                            {resendTimer > 0 ? (
-                              <span className="text-gray-500">
-                                Resend OTP in {resendTimer}s
-                              </span>
-                            ) : resendCount < 2 ? (
-                              <button
-                                onClick={handleSendOtp}
-                                className="text-teal-600 font-semibold underline"
-                              >
-                                Resend OTP
-                              </button>
-                            ) : (
-                              <span className="text-red-500">
-                                OTP limit reached
-                              </span>
-                            )}
-                          </div>
-                        )}
-
-                      </div>
-                    )}
+                    <div className="space-y-4">
+                      <Input
+                        placeholder="Your Name *"
+                        value={leadData.name}
+                        onChange={(e) => setLeadData({ ...leadData, name: e.target.value })}
+                        className="border-gray-300"
+                      />
+                      <Input
+                        placeholder="Phone Number *"
+                        type="tel"
+                        maxLength={10}
+                        value={leadData.phone}
+                        onChange={(e) => setLeadData({ ...leadData, phone: e.target.value.replace(/\D/g, '') })}
+                        className="border-gray-300"
+                      />
+                      <Input
+                        placeholder="Email (Optional)"
+                        type="email"
+                        value={leadData.email}
+                        onChange={(e) => setLeadData({ ...leadData, email: e.target.value })}
+                        className="border-gray-300"
+                      />
+                      <Button
+                        onClick={handleSendOtp}
+                        disabled={isSendingOtp || otpSent}
+                        className="w-full bg-teal-600 py-6 text-lg"
+                      >
+                        {isSendingOtp ? 'Sending OTP...' : 'Get OTP'}
+                      </Button>
+                    </div>
                   </>
                 ) : (
                   <div className="text-center py-8">
