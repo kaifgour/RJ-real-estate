@@ -150,7 +150,7 @@ export default function Home() {
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2 flex-col">
                 <Image src='/logo/nav_logo_edited.svg' alt='logo' width={300} height={100} className="lg:h-[75px] lg:w-[200px] w-[100px] h-[60px]" />
-                <span className="text-sm md:text-[15px] font-bold text-[#009095] mt-1">Rajasthan Real Estate Solutions</span>
+                <span className="text-sm md:text-[15px] font-bold text-[#009095] mt-1">Rajasthan Property Solutions</span>
               </div>
               <div className="hidden md:flex items-center space-x-6">
                 <a href="#new-projects" className="text-gray-700 hover:text-teal-600 font-medium">New Projects</a>
@@ -351,84 +351,173 @@ export default function Home() {
         </section> */}
 
         {/* About Us Section */}
+        {/* About Us Section */}
         <section id="about" className="py-20 bg-gradient-to-b from-white to-teal-50">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 items-center">
-              {/* Left Content */}
-              <div>
-                <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-                  About Rajasthan Real Estate Solutions
-                </h2>
+          <div className="container mx-auto px-4 max-w-6xl">
 
-                <p className="text-gray-600 text-lg mb-6 leading-relaxed">
-                  <span className="font-semibold text-teal-600">Rajasthan Real Estate Solutions</span>
-                  is a trusted name in the real estate industry, built on a strong foundation of integrity, transparency, and over 30+ years of experience. With deep-rooted knowledge of the local market and a commitment to excellence, we have been helping clients buy, sell, and invest in properties with confidence and peace of mind.
-                </p>
+            <div className="text-center mb-12">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+                About Rajasthan Property Solutions
+              </h2>
+              <p className="text-lg text-teal-600 font-medium">
+                30+ Years of Trust • Transparency • Market Expertise
+              </p>
+            </div>
 
-                <p className="text-gray-600 text-lg mb-6 leading-relaxed">
-                  For more than three decades, we have successfully assisted families, investors, and businesses in finding the right residential, commercial, and investment properties in the western suburbs of Mumbai. Especially in and around Jogeshwari and Oshiwara. Our experience enables us to understand market trends, property valuation, legal procedures, and negotiation strategies — ensuring smooth and secure transactions every time.
-                </p>
-                <h3 className="text-3xl font-bold text-teal-600 mb-6">Our expertise</h3>
-                <div className="grid grid-cols-2 gap-6 mt-8">
-                  <div className="bg-white shadow-lg rounded-xl p-6 border hover:border-teal-500 transition">
-                    <h3 className="text-3xl font-bold text-teal-600">1000+</h3>
-                    <p className="text-gray-600">Residential Properties (Flats, Villas, Plots)</p>
-                  </div>
-                  <div className="bg-white shadow-lg rounded-xl p-6 border hover:border-teal-500 transition">
-                    <h3 className="text-3xl font-bold text-teal-600">50+</h3>
-                    <p className="text-gray-600">Top Builders</p>
-                  </div>
-                  <div className="bg-white shadow-lg rounded-xl p-6 border hover:border-teal-500 transition">
-                    <h3 className="text-3xl font-bold text-teal-600">500+</h3>
-                    <p className="text-gray-600">Properties Listed</p>
-                  </div>
-                  <div className="bg-white shadow-lg rounded-xl p-6 border hover:border-teal-500 transition">
-                    <h3 className="text-3xl font-bold text-teal-600">15+</h3>
-                    <p className="text-gray-600">Years Experience</p>
-                  </div>
+            <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
+              <p>
+                <span className="font-semibold text-teal-600">Rajasthan Property Solutions</span>
+                is a trusted name in Mumbai’s real estate industry, built on a strong foundation
+                of integrity, transparency, and over three decades of experience.
+              </p>
+
+              <p>
+                For more than 30 years, we have successfully assisted families, investors,
+                and businesses in buying, selling, and investing in the right properties across
+                the western suburbs of Mumbai — especially in and around
+                <span className="font-semibold"> Jogeshwari and Oshiwara.</span>
+              </p>
+
+              <p>
+                Our deep market knowledge enables us to understand property valuation,
+                market trends, legal procedures, and negotiation strategies — ensuring
+                smooth, secure, and stress-free transactions every time.
+              </p>
+            </div>
+
+            {/* Our Expertise */}
+            <div className="mt-16">
+              <h3 className="text-3xl font-bold text-center text-gray-800 mb-10">
+                Our Expertise
+              </h3>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                <div className="bg-white shadow-lg rounded-xl p-6 border hover:border-teal-500 transition">
+                  <h4 className="text-xl font-bold text-teal-600 mb-3">Residential Properties</h4>
+                  <p className="text-gray-600">Flats, Villas, Plots & Premium Apartments</p>
                 </div>
+
+                <div className="bg-white shadow-lg rounded-xl p-6 border hover:border-teal-500 transition">
+                  <h4 className="text-xl font-bold text-teal-600 mb-3">Commercial Spaces</h4>
+                  <p className="text-gray-600">Offices, Shops & Investment Spaces</p>
+                </div>
+
+                <div className="bg-white shadow-lg rounded-xl p-6 border hover:border-teal-500 transition">
+                  <h4 className="text-xl font-bold text-teal-600 mb-3">Investment Advisory</h4>
+                  <p className="text-gray-600">Strategic Property Investment Guidance</p>
+                </div>
+
+                <div className="bg-white shadow-lg rounded-xl p-6 border hover:border-teal-500 transition">
+                  <h4 className="text-xl font-bold text-teal-600 mb-3">Documentation & Legal</h4>
+                  <p className="text-gray-600">Complete Property Documentation Assistance</p>
+                </div>
+
+                <div className="bg-white shadow-lg rounded-xl p-6 border hover:border-teal-500 transition">
+                  <h4 className="text-xl font-bold text-teal-600 mb-3">Resale & Rentals</h4>
+                  <p className="text-gray-600">End-to-End Support for Buying & Leasing</p>
+                </div>
+
+                <div className="bg-white shadow-lg rounded-xl p-6 border hover:border-teal-500 transition">
+                  <h4 className="text-xl font-bold text-teal-600 mb-3">Property Valuation</h4>
+                  <p className="text-gray-600">Accurate Market Pricing & Negotiation</p>
+                </div>
+
               </div>
             </div>
+
+            <div className="mt-16 text-center text-lg text-gray-700">
+              <p className="font-semibold text-2xl">
+                Your Property. Our Commitment.
+              </p>
+            </div>
+
           </div>
         </section>
 
 
+
         {/* Why Choose Us Section */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">Why Choose Us?</h2>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        {/* Why Choose Us Section */}
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4 max-w-6xl">
+
+            <div className="text-center mb-14">
+              <h2 className="text-4xl font-bold text-gray-800 mb-4">
+                Why Choose Rajasthan Estate Agency?
+              </h2>
+              <p className="text-gray-600 text-lg">
+                Experience. Trust. Results.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+
               <div className="text-center">
                 <div className="bg-teal-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                   <CheckCircle className="w-8 h-8 text-teal-600" />
                 </div>
-                <h3 className="text-xl font-bold mb-2">Verified Properties</h3>
-                <p className="text-gray-600">All properties are RERA verified and genuine</p>
+                <h3 className="text-xl font-bold mb-2">30+ Years of Experience</h3>
+                <p className="text-gray-600">
+                  Deep local market understanding built over three decades.
+                </p>
               </div>
+
               <div className="text-center">
                 <div className="bg-teal-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Star className="w-8 h-8 text-teal-600" />
                 </div>
-                <h3 className="text-xl font-bold mb-2">Expert Guidance</h3>
-                <p className="text-gray-600">15+ years of real estate expertise</p>
+                <h3 className="text-xl font-bold mb-2">Honest & Transparent Dealings</h3>
+                <p className="text-gray-600">
+                  Clear communication with no hidden charges or surprises.
+                </p>
               </div>
+
               <div className="text-center">
                 <div className="bg-teal-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                   <TrendingUp className="w-8 h-8 text-teal-600" />
                 </div>
-                <h3 className="text-xl font-bold mb-2">Best Deals</h3>
-                <p className="text-gray-600">Exclusive offers and pricing</p>
+                <h3 className="text-xl font-bold mb-2">Strong Local Network</h3>
+                <p className="text-gray-600">
+                  Trusted relationships with builders, owners & investors.
+                </p>
               </div>
+
               <div className="text-center">
                 <div className="bg-teal-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Phone className="w-8 h-8 text-teal-600" />
+                  <HomeIcon className="w-8 h-8 text-teal-600" />
                 </div>
-                <h3 className="text-xl font-bold mb-2">24/7 Support</h3>
-                <p className="text-gray-600">Always here to help you</p>
+                <h3 className="text-xl font-bold mb-2">Customer-First Approach</h3>
+                <p className="text-gray-600">
+                  Personalized property solutions based on your goals & budget.
+                </p>
               </div>
+
+              <div className="text-center">
+                <div className="bg-teal-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Building2 className="w-8 h-8 text-teal-600" />
+                </div>
+                <h3 className="text-xl font-bold mb-2">End-to-End Support</h3>
+                <p className="text-gray-600">
+                  From property search to documentation & final deal closure.
+                </p>
+              </div>
+
+              <div className="text-center">
+                <div className="bg-teal-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Key className="w-8 h-8 text-teal-600" />
+                </div>
+                <h3 className="text-xl font-bold mb-2">Secure Transactions</h3>
+                <p className="text-gray-600">
+                  Legally sound, verified & safe property dealings.
+                </p>
+              </div>
+
             </div>
+
           </div>
         </section>
+
 
         {/* Footer */}
         <footer className="bg-gray-900 text-white py-12">
@@ -437,7 +526,7 @@ export default function Home() {
               <div>
                 <div className="flex space-x-2 mb-4 gap-1 flex-col items-start">
                   <Image src='/logo/nav_logo_edited.svg' alt='logo' width={80} height={40} className="lg:h-[80px] lg:w-[200px] w-[100px] h-[60px]" />
-                  <span className="lg:text-xl font-semibold text-md">Rajasthan Real Estate Solutions</span>
+                  <span className="lg:text-xl font-semibold text-md">Rajasthan Property Solutions</span>
                 </div>
                 <p className="text-gray-400">Your trusted partner in finding the perfect home in Mumbai.</p>
               </div>
@@ -464,7 +553,7 @@ export default function Home() {
               </div>
             </div>
             <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-              <p>&copy; 2026 Rajasthan Real Estate Solutions. All rights reserved.</p>
+              <p>&copy; 2026 Rajasthan Property Solutions. All rights reserved.</p>
             </div>
           </div>
         </footer>

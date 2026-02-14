@@ -459,7 +459,7 @@ export default function PropertyDetail() {
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-8 mt-12">
         <div className="container mx-auto px-4 text-center">
-          <p>&copy; 2026 Rajasthan Real Estate Solutions. All rights reserved.</p>
+          <p>&copy; 2026 Rajasthan Property Solutions. All rights reserved.</p>
         </div>
       </footer>
     </div>
