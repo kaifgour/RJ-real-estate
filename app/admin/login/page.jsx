@@ -15,28 +15,32 @@ export default function AdminLogin() {
 
   const login = async () => {
     setLoading(true)
-    toast.loading('Logging in...')
+
+    const toastId = toast.loading('Logging in...')
 
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password
     })
 
-    console.log(data,'dataaaaaaaaaa');
-
     setLoading(false)
 
     if (error) {
-        console.log(error,'errrrr');
-      toast.error(error.message || 'Failed to login')
+      toast.error(error.message || 'Failed to login', {
+        id: toastId
+      })
       return
     }
 
     if (data.session) {
-        toast.success('Logged in successfully')
+      toast.success('Logged in successfully', {
+        id: toastId
+      })
+
       router.push('/admin/dashboard')
     }
   }
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
