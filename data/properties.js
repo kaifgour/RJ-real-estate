@@ -303,7 +303,178 @@ export const propertyDetails = {
             { name: 'Bandra Kurla Complex (BKC)', distance: '20 minutes', type: 'Business District' }
         ]
 
-    }
+    },
+    'euphoria-faime-developer': {
+        id: 105,
+        name: 'Euphoria',
+        builder: 'Faime Developer',
+        location: 'Jogeshwari West, Mumbai',
+        price: '₹1.03 - 1.77 Cr',
+        pricePerSqft: '₹21,000+',
+        type: '1.5, 2, 2.5 BHK Apartment',
+        possession: 'Dec 2028',
+        area: '492 - 844 sq.ft',
+        image: 'https://bwwypmsjamipebelgjgj.supabase.co/storage/v1/object/public/property-images/europhia-img1.png',
+        featured: true,
+
+        gallery: [
+            'https://bwwypmsjamipebelgjgj.supabase.co/storage/v1/object/public/property-images/europhia-img1.png',
+            'https://bwwypmsjamipebelgjgj.supabase.co/storage/v1/object/public/property-images/europhia-img2.png',
+            'https://bwwypmsjamipebelgjgj.supabase.co/storage/v1/object/public/property-images/europhia-img3.png',
+            'https://bwwypmsjamipebelgjgj.supabase.co/storage/v1/object/public/property-images/europhia-img4.png'
+        ],
+
+        status: 'Under Construction',
+        rera: '—',
+
+        description:
+            "Euphoria by Faime Developer is a premium residential tower in Jogeshwari West offering thoughtfully designed 1.5, 2, and 2.5 BHK residences with Jodi options. This G+22 tower combines modern architecture with smart living features including AI-integrated security and next-generation automated parking. Designed for comfort, privacy, and elevated urban living, Euphoria delivers luxury at an accessible price point.",
+
+        amenities: [
+            'Rooftop Amenities',
+            'Fitness Centre',
+            'Prayer Room',
+            'Children’s Play Area',
+            'Jogging Track',
+            'Banquet Hall',
+            'Rainwater Harvesting',
+            'AI Integrated Security',
+            'Smart Parking Tower',
+            'High-Speed Lifts',
+            'Deck in Select Apartments'
+        ],
+
+        specifications: [
+            { label: 'Total Floors', value: 'G + 22 Storey Tower' },
+            { label: 'Apartments per Floor', value: '7 Apartments' },
+            { label: 'Lifts', value: '4 High-Speed Elevators' },
+            { label: 'Parking', value: 'Technology Enabled Parking Tower' },
+            { label: 'Possession', value: 'Dec 2028' },
+            { label: 'Project Status', value: 'Under Construction' }
+        ],
+
+        floorPlans: [
+            {
+                type: 'Typical Floor Plan',
+                area: '804, 844, 842, 668, 485, 492 sq.ft',
+                // price: '₹1.03 Cr approx',
+                image: 'https://bwwypmsjamipebelgjgj.supabase.co/storage/v1/object/public/property-images/europhia-FP1.png'
+            },
+            {
+                type: 'Unit 2 & 3 Jodi',
+                area: '485-1686 sq.ft',
+                // price: '₹1.40 Cr approx',
+                image: 'https://bwwypmsjamipebelgjgj.supabase.co/storage/v1/object/public/property-images/europhia-FP2.png'
+            },
+            {
+                type: 'Unit 6 & 7 Jodi',
+                area: '485 - 1618 sq.ft',
+                // price: '₹1.68 - 1.77 Cr approx',
+                image: 'https://bwwypmsjamipebelgjgj.supabase.co/storage/v1/object/public/property-images/europhia-FP3.png'
+            }
+        ],
+
+        nearbyPlaces: [
+            { name: 'SV Road', distance: '2 mins', type: 'Road' },
+            { name: 'Jogeshwari Railway Station', distance: '5 mins', type: 'Railway Station' },
+            { name: 'Western Express Highway', distance: '10 mins', type: 'Highway' },
+            { name: 'Mumbai Airport', distance: '20 mins', type: 'Airport' },
+            { name: 'Bandra Kurla Complex (BKC)', distance: '20 mins', type: 'Business District' }
+        ]
+    },
+    'crescent-grade-a-commercial-odc-oshivara': {
+    id: 106,
+    name: 'Crescent Grade A Commercial',
+    builder: 'Crescent Group',
+    location: 'SV Road, Oshiwara, Mumbai',
+    price: 'Price on Request',
+    pricePerSqft: 'On Request',
+    type: 'Commercial Office Space',
+    possession: '—',
+    area: '460 - 1,150 sq.ft',
+    image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200&h=800&fit=crop',
+    featured: true,
+
+    gallery: [
+        'https://bwwypmsjamipebelgjgj.supabase.co/storage/v1/object/public/property-images/crescent_img2.png',
+        'https://bwwypmsjamipebelgjgj.supabase.co/storage/v1/object/public/property-images/crescent_img3.png',
+        'https://bwwypmsjamipebelgjgj.supabase.co/storage/v1/object/public/property-images/crescent_img4.png',
+        'https://bwwypmsjamipebelgjgj.supabase.co/storage/v1/object/public/property-images/crescent_img5.png'
+    ],
+
+    status: 'New Launch',
+    rera: 'PC1180002501692',
+
+    description:
+        "Crescent Group presents a Grade A international-standard commercial office development at SV Road, Oshiwara. Located adjacent to Oshiwara District Centre (ODC) and close to NESCO, corporate campuses and premium hotels, this project offers a future-ready business address in Mumbai’s fastest-emerging commercial corridor. Designed with contemporary glass façade architecture and efficient layouts, it delivers long-term value for both end-users and investors.",
+
+    amenities: [
+        'Business Cafeteria',
+        'Professionally Managed Meeting Rooms',
+        'Dedicated Training Centre',
+        'Exclusive Owners’ Lounge',
+        'Architect Designed Common Areas',
+        'Contemporary Glass Façade',
+        'Podium Car Parking',
+        'Guest Parking',
+        'Efficient Floor Layouts'
+    ],
+
+    specifications: [
+        { label: 'Project Type', value: 'Grade A Commercial Office' },
+        { label: 'Office Area Range', value: '460 - 1,150 sq.ft Carpet' },
+        { label: 'Architecture', value: 'Reza Kabul Inspired Design' },
+        { label: 'Parking', value: 'Podium Parking + Guest Parking' },
+        { label: 'Investment Yield', value: 'Approx 7–8% p.a.' },
+        { label: 'Location', value: 'Prime SV Road Frontage, Oshiwara' }
+    ],
+
+    floorPlans: [
+        {
+            // type: '9th Floor',
+            // area: '460 sq.ft',
+            // price: 'On Request',
+            image: 'https://bwwypmsjamipebelgjgj.supabase.co/storage/v1/object/public/property-images/crescent_FP1.png'
+        },
+        {
+            // type: '10th & 21st Floor',
+            // area: '800 sq.ft',
+            // price: 'On Request',
+            image: 'https://bwwypmsjamipebelgjgj.supabase.co/storage/v1/object/public/property-images/crescent_FP2.png'
+        },
+        {
+            // type: '11th, 12th, 15th & 22nd Floor',
+            // area: '1,150 sq.ft',
+            // price: 'On Request',
+            image: 'https://bwwypmsjamipebelgjgj.supabase.co/storage/v1/object/public/property-images/crescent_FP3.png'
+        },
+        {
+            // type: '13th, 17th & 24th Floor',
+            // area: '1,150 sq.ft',
+            // price: 'On Request',
+            image: 'https://bwwypmsjamipebelgjgj.supabase.co/storage/v1/object/public/property-images/crescent_FP4.png'
+        },
+        {
+            // type: 'Large Office',
+            // area: '1,150 sq.ft',
+            // price: 'On Request',
+            image: 'https://bwwypmsjamipebelgjgj.supabase.co/storage/v1/object/public/property-images/crescent_FP5.png'
+        },
+
+    ],
+
+    nearbyPlaces: [
+        { name: 'Oshiwara District Centre (ODC)', distance: 'Adjacent', type: 'Commercial Hub' },
+        { name: 'NESCO IT Park', distance: '5 mins', type: 'Corporate Campus' },
+        { name: 'SV Road', distance: 'Direct Frontage', type: 'Road' },
+        { name: 'Western Express Highway', distance: '10 mins', type: 'Highway' },
+        { name: 'Andheri Station', distance: '10 mins', type: 'Railway Station' },
+        { name: 'Metro Connectivity', distance: 'Nearby', type: 'Metro' }
+    ]
+}
+
+    
+
 }
 
 
@@ -342,7 +513,6 @@ export const newProjects = [
         status: 'Under Construction',
         rera: 'PM1180002500596',
     },
-
     {
         id: 3,
         slug: 'golden-jubilee-heights',
@@ -360,7 +530,6 @@ export const newProjects = [
         status: 'Ready Possession',
         rera: 'P51800048287'
     },
-
     {
         id: 4,
         slug: 'roswalt-zaiden',
@@ -382,7 +551,56 @@ export const newProjects = [
         ],
         status: 'Under Construction',
         rera: 'P51800047680'
-    }
+    },
+    {
+        id: 5,
+        slug: 'euphoria-faime-developer',
+        name: 'Euphoria',
+        builder: 'Faime Developer',
+        location: 'Jogeshwari West, Mumbai',
+        price: '₹1.03 - 1.77 Cr',
+        pricePerSqft: '₹21,000+',
+        type: '1.5, 2, 2.5 BHK Apartment',
+        possession: 'Dec 2028',
+        area: '492 - 844 sq.ft',
+        image: 'https://bwwypmsjamipebelgjgj.supabase.co/storage/v1/object/public/property-images/europhia-img1.png',
+        featured: true,
+        amenities: [
+            'Rooftop Amenities',
+            'Fitness Centre',
+            'Prayer Room',
+            'Children’s Play Area',
+            'Jogging Track',
+            'Banquet Hall'
+        ],
+        status: 'Under Construction',
+        rera: '—'
+    },
+    {
+    id: 6,
+    slug: 'crescent-grade-a-commercial-odc-oshivara',
+    name: 'Crescent Grade A Commercial',
+    builder: 'Crescent Group',
+    location: 'SV Road, Oshiwara, Mumbai',
+    price: 'Price on Request',
+    pricePerSqft: 'On Request',
+    type: 'Commercial Office Space',
+    possession: '—',
+    area: '460 - 1,150 sq.ft',
+    image: 'https://bwwypmsjamipebelgjgj.supabase.co/storage/v1/object/public/property-images/crescent_img1.png',
+    featured: true,
+    amenities: [
+        'Business Cafeteria',
+        'Meeting Rooms',
+        'Training Centre',
+        'Owners Lounge',
+        'Podium Car Parking'
+    ],
+    status: 'New Launch',
+    rera: 'PC1180002501692'
+}
+
+
 
 
 ]
